@@ -73,13 +73,19 @@ def perquest(request):
     return render(request, 'perquest.html', contexto)
 
 def processar_respostas(respostas):
-    total_pontos = sum(resposta.valor for resposta in Resposta.objects.filter(id__in=respostas.values()))
+    total_pontos = sum(Resposta.objects.get(id=resposta_id).valor for resposta_id in respostas.values())
+    
+    print("Total de pontos:", total_pontos)  # Adiciona este print para verificar o total de pontos
+
     if total_pontos <= 2:
-        return 'Baixo'
+        espectro = 'Baixo'
     elif total_pontos <= 7:
-        return 'Médio'
+        espectro = 'Médio'
     else:
-        return 'Alto'
+        espectro = 'Alto'
+
+    print("Espectro:", espectro)  # Adiciona este print para verificar o espectro atribuído
+    return espectro
 
 @login_required
 def resultado(request):

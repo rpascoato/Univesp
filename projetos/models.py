@@ -52,7 +52,7 @@ class Resultado(models.Model):
         ('Baixo', 'Baixo'),
     ]
 
-    nivel = models.CharField(max_length=10, choices=ESPECTRO_CHOICES)
+    nivel = models.CharField(max_length=10, choices=ESPECTRO_CHOICES, null=True)
     cod_alu = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     cod_usu = models.ForeignKey(Usuario, on_delete=models.CASCADE)
 
